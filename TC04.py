@@ -15,13 +15,13 @@ try:
 
     # Nhập username, email và password
     email_input = wait.until(EC.presence_of_element_located((By.NAME, "username")))
-    email_input.send_keys("user3")
+    email_input.send_keys("user4")
 
     email_input = wait.until(EC.presence_of_element_located((By.NAME, "email")))
-    email_input.send_keys("user3@gmail.com")
+    email_input.send_keys("user4@gmail.com")
 
     password_input = driver.find_element(By.NAME, "password")
-    password_input.send_keys("User3@1")
+    password_input.send_keys("User4a1")
 
     # Click nút Create Account
     sign_in_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Create Account')]")
@@ -34,7 +34,7 @@ try:
         print(f"Thông báo từ hệ thống: {alert_text}")
         alert.accept()
 
-        if alert_text.strip() == "Vui lòng nhập mật khẩu đủ 8 ký tự để đảm bảo yêu cầu bảo mật":
+        if alert_text.strip() == "Vui lòng nhập mật khẩu ít nhất 1 ký tự đặc biệt để đảm bảo yêu cầu bảo mật":
             print("PASSED")
         else:
             print(f"FAILED - Nội dung alert không đúng mong đợi")
