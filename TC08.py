@@ -15,13 +15,13 @@ try:
 
     # Nhập username, email và password
     username_input = wait.until(EC.presence_of_element_located((By.NAME, "username")))
-    username_input.send_keys("user4")
+    username_input.send_keys("user8")
 
     email_input = wait.until(EC.presence_of_element_located((By.NAME, "email")))
-    email_input.send_keys("user4@gmail.com")
+    email_input.send_keys("")
 
     password_input = driver.find_element(By.NAME, "password")
-    password_input.send_keys("User4a1")
+    password_input.send_keys("User8@123")
 
     # Click nút Create Account
     sign_in_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Create Account')]")
@@ -29,18 +29,17 @@ try:
 
     # Đợi và xử lý alert nếu xuất hiện
     try:
-        alert = WebDriverWait(driver, 5).until(EC.alert_is_present())
-        alert_text = alert.text
-        print(f"Thông báo từ hệ thống: {alert_text}")
-        alert.accept()
+        message = driver.execute_script("return arguments[0].validationMessage;", email_input)
 
-        if alert_text.strip() == "Vui lòng nhập mật khẩu ít nhất 1 ký tự đặc biệt để đảm bảo yêu cầu bảo mật":
+        expected_message = "Vui lòng điền vào trường này."
+
+        if expected_message == message:
             print("PASSED")
         else:
-            print(f"FAILED - Nội dung alert không đúng mong đợi")
+            print(f"FAILED - Nội dung thông báo không đúng mong đợi.")
 
     except:
-        print("FAILED - Không có alert xuất hiện")
+        print("FAILED - Không có thông báo lỗi xuất hiện")
 
 
     input("Nhấn Enter để tiếp tục...")

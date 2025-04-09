@@ -14,8 +14,8 @@ try:
     wait = WebDriverWait(driver, 10)
 
     # Nhập username, email và password
-    email_input = wait.until(EC.presence_of_element_located((By.NAME, "username")))
-    email_input.send_keys("user2")
+    username_input = wait.until(EC.presence_of_element_located((By.NAME, "username")))
+    username_input.send_keys("user2")
 
     email_input = wait.until(EC.presence_of_element_located((By.NAME, "email")))
     email_input.send_keys("user2gmail.com")
