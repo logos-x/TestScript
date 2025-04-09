@@ -46,11 +46,12 @@ try:
     create_btn.click()
 
     # Kiểm tra thông báo thành công
-    message = driver.execute_script("return arguments[0].validationMessage;", date)
+    error_msg = WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.XPATH, "//p[contains(@class, 'text-red-700')]"))
+    )
 
-    expected_message = "Vui lòng chọn ngày trong tương lai."
-
-    if expected_message == message:
+    expected_message = "Ngày không được nằm trong quá khứ!"
+    if expected_message == error_msg.text:
         print("PASSED")
     else:
         print("FAILED - Nội dung thông báo không đúng mong đợi.")
