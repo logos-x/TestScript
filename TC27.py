@@ -31,7 +31,7 @@ try:
     # Chờ form hiện
     wait.until(EC.presence_of_element_located((By.XPATH, "//form")))
 
-   # Nhập dữ liệu nhng không điền vào trường Service name
+   # Nhập dữ liệu nhưng không điền vào trường Service name
     driver.find_element(By.XPATH, "//input[@placeholder='Enter quantity']").send_keys("2")
     driver.find_element(By.XPATH, "//textarea[@placeholder='Enter service description']").send_keys("Không có")
     driver.find_element(By.XPATH, "//input[@placeholder='Enter price']").send_keys("8000000")
