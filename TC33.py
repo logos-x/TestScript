@@ -19,7 +19,7 @@ try:
     category_nav = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Category Management']")))
     category_nav.click()
 
-    # Không nhập gì
+
     input_field = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Enter category name']")))
     input_field.clear()
     input_field.send_keys("Tiệc cưới")
