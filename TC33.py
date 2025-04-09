@@ -22,7 +22,7 @@ try:
     # Không nhập gì
     input_field = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Enter category name']")))
     input_field.clear()
-    input_field.send_keys("Selenium Test Category")
+    input_field.send_keys("Tiệc cưới")
     # Click Add
     add_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Add')]")
     add_button.click()

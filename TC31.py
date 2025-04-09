@@ -24,7 +24,7 @@ try:
 
     # B4: Nhập tên category mới
     input_field = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Enter category name']")))
-    new_category_name = "Selenium Test Category 2"
+    new_category_name = "Tiệc cưới"
     input_field.clear()
     input_field.send_keys(new_category_name)
 

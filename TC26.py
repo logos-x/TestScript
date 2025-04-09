@@ -11,7 +11,7 @@ driver.maximize_window()
 try:
     wait = WebDriverWait(driver, 10)
 
-    # Ghi đè window.alert để lưu nội dung alert vào biến toàn cục
+    # Truy cập trang đăng nhập và ghi đè window.alert để lấy thông báo sau này
     driver.get("http://localhost:5173/login")
     driver.execute_script("""
         window.__lastAlertMessage = "";
@@ -25,32 +25,28 @@ try:
     driver.find_element(By.NAME, "password").send_keys("Admin@123")
     driver.find_element(By.XPATH, "//button[contains(text(), 'Sign In')]").click()
 
-    # Vào trang Category Management
-    category_nav = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Category Management']")))
-    category_nav.click()
+    # Truy cập "Service Management"
+    service_nav = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Service Management']")))
+    service_nav.click()
 
-    # Chờ danh sách categories hiện ra
-    wait.until(EC.presence_of_element_located((By.XPATH, "//ul/li")))
+    # Chờ form xuất hiện
+    wait.until(EC.presence_of_element_located((By.XPATH, "//form")))
 
-    # Bấm nút Edit trên category đầu tiên
-    edit_button = driver.find_element(By.XPATH, "(//button[text()='Edit'])[1]")
-    edit_button.click()
+    # Nhập dữ liệu
+    driver.find_element(By.XPATH, "//input[@placeholder='Enter service name']").send_keys("Service A")
+    driver.find_element(By.XPATH, "//input[@placeholder='Enter quantity']").send_keys("2")
+    driver.find_element(By.XPATH, "//textarea[@placeholder='Enter service description']").send_keys("Không có")
+    driver.find_element(By.XPATH, "//input[@placeholder='Enter price']").send_keys("8000000")
 
-    # Xóa nội dung cũ, nhập tên đã tồn tại: Selenium Test Category
-    input_field = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Enter category name']")))
-    input_field.clear()
-    input_field.send_keys("Đám giỗ")
+    # Nhấn nút Add
+    driver.find_element(By.XPATH, "//button[contains(text(), 'Add')]").click()
 
-    # Bấm nút Update
-    update_button = driver.find_element(By.XPATH, "//button[text()='Update']")
-    update_button.click()
-
-    # Đợi React gọi alert và lấy nội dung
+    # Đợi và lấy thông báo alert
     time.sleep(1)
     alert_text = driver.execute_script("return window.__lastAlertMessage;")
     print("Popup hiển thị:", alert_text)
 
-    if alert_text == "Unable to add/update category!":
+    if alert_text == "Service added successfully!":
         print("PASSED")
     else:
         print("FAILED - Không đúng nội dung thông báo mong đợi.")
