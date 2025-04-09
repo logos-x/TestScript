@@ -15,13 +15,13 @@ try:
 
     # Nhập username, email và password
     email_input = wait.until(EC.presence_of_element_located((By.NAME, "username")))
-    email_input.send_keys("user1")
+    email_input.send_keys("user2")
 
     email_input = wait.until(EC.presence_of_element_located((By.NAME, "email")))
-    email_input.send_keys("user1@gmail.com")
+    email_input.send_keys("user2gmail.com")
 
     password_input = driver.find_element(By.NAME, "password")
-    password_input.send_keys("User1@123")
+    password_input.send_keys("User2@123")
 
     # Click nút Create Account
     sign_in_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Create Account')]")
@@ -29,22 +29,18 @@ try:
 
     # Đợi và xử lý alert nếu xuất hiện
     try:
-        alert = WebDriverWait(driver, 5).until(EC.alert_is_present())
-        alert_text = alert.text
-        print(f"Thông báo từ hệ thống: {alert_text}")
-        alert.accept()
+        # Lấy thông báo lỗi từ thuộc tính validation của trình duyệt
+        message = driver.execute_script("return arguments[0].validationMessage;", email_input)
 
-        # Đợi đến khi URL đổi sang trang login
-        current_url = driver.current_url
-        print(f"URL hiện tại: {current_url}")
+        expected_message = "Vui lòng bao gồm '@' trong địa chỉ email."
 
-        if alert_text.strip() == "Registration successful" and current_url == "http://localhost:5173/login":
+        if expected_message in message:
             print("PASSED")
         else:
-            print("FAILED - Nội dung alert không đúng mong đợi")
+            print(f"FAILED - Nội dung thông báo không đúng mong đợi: {message}")
 
     except:
-        print("FAILED - Không có alert xuất hiện")
+        print("FAILED - Không có thông báo lỗi xuất hiện")
 
 
     input("Nhấn Enter để tiếp tục...")
