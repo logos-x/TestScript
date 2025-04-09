@@ -18,7 +18,7 @@ try:
     email_input.send_keys("user@gmail.com")
 
     password_input = driver.find_element(By.NAME, "password")
-    password_input.send_keys("User@123")
+    password_input.send_keys("User1@123")
 
     # Click nút Sign In
     sign_in_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Sign In')]")
