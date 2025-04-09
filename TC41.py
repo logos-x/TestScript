@@ -39,7 +39,7 @@ try:
     # Xóa nội dung cũ, nhập tên đã tồn tại: Selenium Test Category
     input_field = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Enter category name']")))
     input_field.clear()
-    input_field.send_keys("Selenium Test Category")
+    input_field.send_keys("Đám giỗ")
 
     # Bấm nút Update
     update_button = driver.find_element(By.XPATH, "//button[text()='Update']")

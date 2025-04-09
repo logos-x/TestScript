@@ -31,7 +31,7 @@ try:
     # B6: Chỉnh sửa nội dung Category Name
     input_field = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Enter category name']")))
     input_field.clear()
-    input_field.send_keys("Selenium Updated Category")
+    input_field.send_keys("Đám hỏi")
 
     # B7: Click nút Update
     update_button = driver.find_element(By.XPATH, "//button[text()='Update']")
